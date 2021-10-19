@@ -31,5 +31,8 @@ try{
 
 // Path creation
 
-const appRouter = require('./router/shopRouter');
-app.use('/appRouter', appRouter)
+const appShopRouter = require('./router/shopRouter');
+app.use('/appRouter', appShopRouter);
+
+const appCategoryRouter = require('./router/categoryRouter');
+app.use('/appRouter', appCategoryRouter);
