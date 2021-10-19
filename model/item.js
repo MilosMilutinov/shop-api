@@ -4,7 +4,7 @@ const categSchema = require("./category.js")
 const itemSchema = mongoose.Schema({
     name: {type: String, required: true},
     created: {type: Date, required: true, unique: true},
-    category: [categSchema.name],
+    category: [categSchema],
     quantity: {type: Number, required: true}
 });
 

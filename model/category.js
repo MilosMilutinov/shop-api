@@ -8,3 +8,4 @@ const categorySchema = mongoose.Schema({
 
 var categoryData = mongoose.model("categoryData", categorySchema);
 module.exports = categoryData;
+module.exports = categorySchema;
