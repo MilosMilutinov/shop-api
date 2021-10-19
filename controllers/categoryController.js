@@ -19,7 +19,7 @@ const getSpecCategory = async(req,res) => {
     const name = req.params.name;
 
     try{
-        const category = await Category.find({name: name});
+        const category = await Category.findOne({name: name});
 
         res.status(200).json(category);
     }catch(error){

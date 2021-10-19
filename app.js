@@ -36,3 +36,7 @@ app.use('/appRouter', appShopRouter);
 
 const appCategoryRouter = require('./router/categoryRouter');
 app.use('/appRouter', appCategoryRouter);
+
+const appItemRouter = require('./router/itemRouter');
+app.use('/appRouter', appItemRouter);
+
