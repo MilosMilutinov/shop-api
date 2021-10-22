@@ -5,9 +5,9 @@ const appRoute = require('../controllers/itemController');
 const router = express.Router();
 
 router.get('/', appRoute.getAll);
-router.get('/:name', appRoute.getSpecItem);
+router.get('/:name', appRoute.getItemByName);
 router.post('/', appRoute.createItem);
-router.post('/:name', appRoute.updateItem);
-router.post('/:name', appRoute.deleteItem);
+router.put('/:name', appRoute.updateItem);
+router.delete('/:name', appRoute.deleteItem);
 
 module.exports = router;
