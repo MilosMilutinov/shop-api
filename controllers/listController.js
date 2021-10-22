@@ -35,11 +35,8 @@ const getListByName = async (req, res) => {
 
 // Creating new list
 const createList = async (req, res) => {
-
-    const item = await itemService.findItemByName(req.body.item);
-    const shop = await shopService.findShopByName(req.body.name);
-    console.log(item);
-    console.log(shop);
+    const item = await itemService.findItemByName(req.body.items);
+    const shop = await shopService.findShopByName(req.body.shop);
     const newList = new ListData({
         name: req.body.name,
         created: new Date(),
