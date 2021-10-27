@@ -1,16 +1,11 @@
-const express = require("express");
-
-const Category = require('../model/category.js');
-
-const router = express.Router();
 
 const categoryService = require('../service/categoryService.js');
 
 
-// When called, shows all categories in database
+// Showing all categories in database
 const getAll = async (req, res) => {
     try {
-        const category = await Category.categoryData.find();
+        const category = await categoryService.findAllCategories();
 
         res.status(200).json(category);
     } catch (error) {
@@ -18,40 +13,37 @@ const getAll = async (req, res) => {
     }
 }
 
-// When called, shows only a category chosen by name
+// Showing only a category chosen by name
 const getCategoryByName = async (req, res) => {
 
     const name = req.params.name;
 
     try {
         const category = await categoryService.findCategoryByName(name);
-
         res.status(200).json(category);
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
 }
 
-// Function that creates new category
+// Creating a new category
 const createCategory = async (req, res) => {
 
-    const newCategory = new Category.categoryData({
-        name: req.body.name,
-        description: req.body.description,
-    });
+    const name = req.body.name;
+    const description = req.body.description;
 
     try {
-        await newCategory.save();
-
+        const newCategory = await categoryService.createNewCategory(name, description);
+        
         res.status(201).json(newCategory);
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        res.status(404).json({ message: error.message});
     }
 }
 
 
 
-// Exported for category router
+// Exported for routing
 module.exports.getAll = getAll;
 module.exports.getCategoryByName = getCategoryByName;
 module.exports.createCategory = createCategory;
