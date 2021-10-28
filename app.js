@@ -41,7 +41,6 @@ const appItemRouter = require('./router/itemRouter');
 app.use('/appItem', appItemRouter);
 
 const appListRouter = require('./router/listRouter');
-const bodyParser = require("body-parser");
 app.use('/appList', appListRouter);
 
 app.get("/", (req, res) => {

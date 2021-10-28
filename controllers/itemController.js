@@ -5,12 +5,11 @@ const { ItemData } = require('../model/item.js');
 const categoryService = require('../service/categoryService.js');
 const itemService = require('../service/itemService.js');
 
-const router = express.Router();
 
-// When called, shows all items in database
+// Lists all items in database
 const getAll = async (req, res) => {
     try {
-        const item = await ItemData.find();
+        const item = await itemService.findAllItems();
 
         res.status(200).json(item);
     } catch (error) {
@@ -19,7 +18,7 @@ const getAll = async (req, res) => {
 }
 
 
-// When called, shows only one item
+// Lists one item
 const getItemByName = async (req, res) => {
 
     const name = req.params.name;
@@ -34,7 +33,8 @@ const getItemByName = async (req, res) => {
 }
 
 
-// Creating new item
+// Create new item
+
 const createItem = async (req, res) => {
 
     const category = await categoryService.findCategoryByName(req.body.category);
@@ -85,7 +85,7 @@ const deleteItem = async (req, res) => {
     console.log(name);
 
     try {
-        await ItemData.findOneAndRemove(name);
+        await ItemData.findOneAndDelete(name);
         res.status(203).json({ name: name });
 
     } catch (error) {

@@ -32,10 +32,14 @@ const createCategory = async (req, res) => {
     const name = req.body.name;
     const description = req.body.description;
 
+    console.log(name);
+    console.log(description);
+
     try {
         const newCategory = await categoryService.createNewCategory(name, description);
         
         res.status(201).json(newCategory);
+        await newCategory.save();
     } catch (error) {
         res.status(404).json({ message: error.message});
     }

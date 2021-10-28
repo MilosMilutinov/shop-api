@@ -1,6 +1,7 @@
 
 const Category = require('../model/category.js');
 
+// Listing all categories
 const findAllCategories = async () => {
     try {
         const category = await Category.categoryData.find();
@@ -26,6 +27,7 @@ const findCategoryByName = async (name) => {
 
 }
 
+// Creating new category
 const createNewCategory = async (name, description) => {
     
     try {

@@ -82,14 +82,11 @@ const updateList = async (req, res) => {
 // Deleting list
 const deleteList = async (req, res) => {
     const name = req.params.name;
+    console.log(name);
 
     try {
-        await ListData.findOneAndRemove(
-            {
-                name: name,
-            }
-        );
-        res.status(203).json({ name: name });
+        await ListData.findOneAndDelete(name);
+        res.status(203).json(name);
 
     } catch (error) {
         res.status(402).json({ message: error.message });
