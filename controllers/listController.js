@@ -50,7 +50,7 @@ const createList = async (req, res) => {
 
         res.status(201).json(newList);
     } catch (error) {
-        res.status(404).json({ message: error.message + " dadaadadadda" });
+        res.status(404).json({ message: error.message });
     }
 };
 
