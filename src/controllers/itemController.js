@@ -1,12 +1,14 @@
-const express = require("express");
-
 const { ItemData } = require('../model/item.js');
 
 const categoryService = require('../service/categoryService.js');
 const itemService = require('../service/itemService.js');
 
 
-// Lists all items in database
+/**
+ * Showing all items in database
+ * @param {Object} req 
+ * @param {Object} res 
+ */
 const getAll = async (req, res) => {
     try {
         const item = await itemService.findAllItems();
@@ -18,7 +20,11 @@ const getAll = async (req, res) => {
 }
 
 
-// Lists one item
+/**
+ * Showing only one item by its name
+ * @param {Object} req 
+ * @param {Object} res 
+ */
 const getItemByName = async (req, res) => {
 
     const name = req.params.name;
@@ -33,7 +39,11 @@ const getItemByName = async (req, res) => {
 }
 
 
-// Create new item
+/**
+ * Create new item
+ * @param {Object} req 
+ * @param {Object} res 
+ */
 
 const createItem = async (req, res) => {
 
@@ -55,7 +65,11 @@ const createItem = async (req, res) => {
 };
 
 
-// Updating an item
+/**
+ * Update item
+ * @param {Object} req 
+ * @param {Object} res 
+ */
 const updateItem = async (req, res) => {
     const name = req.params.name;
 
@@ -79,7 +93,11 @@ const updateItem = async (req, res) => {
 }
 
 
-// Deleting an item
+/**
+ * Delete item
+ * @param {Object} req 
+ * @param {Object} res 
+ */
 const deleteItem = async (req, res) => {
     const name = req.params.name;
     console.log(name);

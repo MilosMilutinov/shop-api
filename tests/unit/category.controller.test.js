@@ -1,5 +1,5 @@
-const categoryController = require('../../controllers/categoryController');
-const categoryService = require('../../service/categoryService');
+const categoryController = require('../../src/controllers/categoryController');
+const categoryService = require('../../src/service/categoryService');
 
 categoryService.createNewCategory = jest.fn();
 

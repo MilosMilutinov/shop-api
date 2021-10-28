@@ -8,7 +8,11 @@ const listService = require('../service/listService');
 
 const router = express.Router();
 
-// When called, shows all lists in database
+/**
+ * Showing all lists in database
+ * @param {Object} req 
+ * @param {Object} res 
+ */
 const getAll = async (req, res) => {
     try {
         const list = await ListData.find();
@@ -19,7 +23,11 @@ const getAll = async (req, res) => {
     }
 }
 
-// When called, shows only one list
+/**
+ * Showing only one list in database
+ * @param {Object} req 
+ * @param {Object} res 
+ */
 const getListByName = async (req, res) => {
 
     const name = req.params.name;
@@ -33,7 +41,11 @@ const getListByName = async (req, res) => {
     }
 }
 
-// Creating new list
+/**
+ * Create new list
+ * @param {Object} req 
+ * @param {Object} res 
+ */
 const createList = async (req, res) => {
     const item = await itemService.findItemByName(req.body.items);
     const shop = await shopService.findShopByName(req.body.shop);
@@ -54,13 +66,15 @@ const createList = async (req, res) => {
     }
 };
 
-//Updating list
+/**
+ * Update list
+ * @param {Object} req 
+ * @param {Object} res 
+ */
 const updateList = async (req, res) => {
     const name = req.params.name;
     const item = await itemService.findItemByName(req.body.item);
     const shop = await shopService.findShopByName(req.body.name);
-
-
     try {
         await ListData.findOneAndUpdate(
             {
@@ -79,7 +93,11 @@ const updateList = async (req, res) => {
     }
 }
 
-// Deleting list
+/**
+ * Delete list
+ * @param {Object} req 
+ * @param {Object} res 
+ */
 const deleteList = async (req, res) => {
     const name = req.params.name;
     console.log(name);

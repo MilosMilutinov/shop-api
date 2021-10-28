@@ -4,7 +4,11 @@ const { ShopData } = require('../model/shop.js');
 
 const router = express.Router();
 
-// When called, shows all shops in database
+/**
+ * Showing every shop in database
+ * @param {Object} req 
+ * @param {Object} res 
+ */
 const getAll = async (req, res) => {
     try {
         const shop = await ShopData.find();
@@ -15,7 +19,11 @@ const getAll = async (req, res) => {
     }
 }
 
-// When called, shows only one shop
+/**
+ * Showing only one shop
+ * @param {Object} req 
+ * @param {Object} res 
+ */
 const getSpecShop = async (req, res) => {
 
     const name = req.params.name;
@@ -29,7 +37,11 @@ const getSpecShop = async (req, res) => {
     }
 }
 
-// Creating shop
+/**
+ * Create shop
+ * @param {Object} req 
+ * @param {Object} res 
+ */
 const createShop = async (req, res) => {
 
     const newShop = new ShopData({

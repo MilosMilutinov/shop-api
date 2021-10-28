@@ -31,16 +31,16 @@ try {
 
 // Path creation
 
-const appShopRouter = require('./router/shopRouter');
+const appShopRouter = require('./src/router/shopRouter');
 app.use('/appShop', appShopRouter);
 
-const appCategoryRouter = require('./router/categoryRouter');
+const appCategoryRouter = require('./src/router/categoryRouter');
 app.use('/appCategory', appCategoryRouter);
 
-const appItemRouter = require('./router/itemRouter');
+const appItemRouter = require('./src/router/itemRouter');
 app.use('/appItem', appItemRouter);
 
-const appListRouter = require('./router/listRouter');
+const appListRouter = require('./src/router/listRouter');
 app.use('/appList', appListRouter);
 
 app.get("/", (req, res) => {

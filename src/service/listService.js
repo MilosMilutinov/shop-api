@@ -1,20 +1,17 @@
 
-const express = require("express");
-
 const { ListData } = require('../model/list.js');
 
-// Finding a list by name
+/**
+ * Finding a list by name
+ * @param {String} name 
+ * @returns List object
+ */
 const findListByName = async (name) => {
-
     try {
-        const list = await ListData.findOne({ name: name });
-
-        return list;
+        return await ListData.findOne({ name: name });
     } catch (error) {
         console.log(error);
-        return;
     }
-
 }
 
 module.exports.findListByName = findListByName;
