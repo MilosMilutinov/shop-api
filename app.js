@@ -1,10 +1,9 @@
 const express = require("express");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const app = express();
 
-const mongodb = require('mongodb');
-
-var url = "mongodb+srv://admin:admin@cluster0.xofnl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+var url =
+  "mongodb+srv://admin:admin@cluster0.xofnl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 // Get the default connection
 
@@ -12,7 +11,7 @@ var db = mongoose.connection;
 
 // Bind connection to error event
 
-db.on('error', console.error.bind(console, "MongoDB connection error: "));
+db.on("error", console.error.bind(console, "MongoDB connection error"));
 
 // Our default port
 const port = 2000;
@@ -21,33 +20,40 @@ mongoose.connect(url, { useNewUrlParser: true });
 const connect = mongoose.connection;
 app.use(express.json());
 try {
-    connect.on("open", () => {
-        console.log('connected');
-    });
+  connect.on("open", () => {
+    console.log("Successfully connected");
+  });
 } catch (error) {
-    console.log("Error: " + error);
+  console.log("Error: " + error);
 }
 
+// Enable CORS
 
-// Path creation
+app.use(function(req, res,next){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    next();
+})
 
-const appShopRouter = require('./src/router/shopRouter');
-app.use('/appShop', appShopRouter);
+// Routes
 
-const appCategoryRouter = require('./src/router/categoryRouter');
-app.use('/appCategory', appCategoryRouter);
+const appShopRouter = require("./src/router/shopRouter");
+app.use("/appShop", appShopRouter);
 
-const appItemRouter = require('./src/router/itemRouter');
-app.use('/appItem', appItemRouter);
+const appCategoryRouter = require("./src/router/categoryRouter");
+app.use("/appCategory", appCategoryRouter);
 
-const appListRouter = require('./src/router/listRouter');
-app.use('/appList', appListRouter);
+const appItemRouter = require("./src/router/itemRouter");
+app.use("/appItem", appItemRouter);
+
+const appListRouter = require("./src/router/listRouter");
+app.use("/appList", appListRouter);
 
 app.get("/", (req, res) => {
-    res.send("Hello World");
-})
-
+  res.send("Hello World");
+});
 
 app.listen(port, () => {
-    console.log(`Listening at http://localhost:${port}`);
-})
+  console.log(`Listening at http://localhost:${port}`);
+});
