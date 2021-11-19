@@ -1,36 +1,51 @@
-
-const Category = require('../model/category.js');
+const Category = require("../model/category.js");
 
 // Listing all categories
 const findAllCategories = async () => {
-    try {
-        return await Category.categoryData.find();
-    } catch (error) {
-        console.log(error);
-    }
-}
+  try {
+    return await Category.find();
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // Finding a category by name
 const findCategoryByName = async (name) => {
-    try {
-        return await Category.categoryData.findOne({ name: name });
-    } catch (error) {
-        console.log(error);
-    }
-}
+  try {
+    const category = await Category.findOne({ name: name });
+    console.log("category: ", category);
+    return category;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Finding a category by id
+const findCategoryById = async (id) => {
+  try {
+    const category = await Category.findOne({ _id: id });
+    return category.name;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // Creating new category
 const createNewCategory = async (name, description) => {
-    try {
-       return new Category.categoryData({
-            name: name,
-            description: description
-        });
-    } catch (error) {
-        console.log(error);
-    }
-}
+  try {
+    const category = new Category({
+      name: name,
+      description: description,
+    });
+    return category.save();
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-module.exports.findCategoryByName = findCategoryByName;
-module.exports.createNewCategory = createNewCategory;
-module.exports.findAllCategories = findAllCategories;
+module.exports = {
+  findCategoryById,
+  findCategoryByName,
+  createNewCategory,
+  findAllCategories,
+};

@@ -9,5 +9,7 @@ router.get('/:name', appRoute.getListByName);
 router.post('/', appRoute.createList);
 router.put('/:name', appRoute.updateList);
 router.delete('/:name', appRoute.deleteList);
+router.put('/update/addItemToList', appRoute.addItemToList);
+router.put('/update/removeItemFromList', appRoute.removeItemFromList);
 
 module.exports = router;

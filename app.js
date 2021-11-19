@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const app = express();
 
 var url =
-  "mongodb+srv://admin:admin@cluster0.xofnl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+  "mongodb://127.0.0.1:27017";
 
 // Get the default connection
 

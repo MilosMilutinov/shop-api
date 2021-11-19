@@ -1,6 +1,5 @@
-const { ItemData } = require("../model/item.js");
+const Item = require("../model/item.js");
 
-const categoryService = require("../service/categoryService.js");
 const itemService = require("../service/itemService.js");
 
 /**
@@ -40,19 +39,13 @@ const getItemByName = async (req, res) => {
  * @param {Object} req
  * @param {Object} res
  */
-
 const createItem = async (req, res) => {
-  const category = await categoryService.findCategoryByName(req.body.category);
-  const newItem = new ItemData({
-    name: req.body.name,
-    created: new Date(),
-    category: [category],
-    quantity: req.body.quantity,
-  });
+  const itemName = req.body.name;
+  const categoryName = req.body.category;
+  const quantity = req.body.quantity;
 
   try {
-    await newItem.save();
-
+    const newItem = itemService.saveItem(itemName, categoryName, quantity);
     res.status(201).json(newItem);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -71,8 +64,8 @@ const updateItem = async (req, res) => {
   console.log(req.body);
 
   try {
-    await itemService.updateItem(name, categoryName, quantity);
-    res.status(202).json({ name: name });
+    const item = await itemService.updateItem(name, categoryName, quantity);
+    res.status(202).json(item);
   } catch (error) {
     console.log(error);
     res.status(401).json({ message: error.message });
@@ -89,16 +82,18 @@ const deleteItem = async (req, res) => {
   console.log(name);
 
   try {
-    await ItemData.findOneAndDelete({name: name});
-    res.status(203).json({ name: name });
+    await Item.findOneAndDelete( {name : req.params.name});
+    res.status(203).json(name);
   } catch (error) {
     res.status(402).json({ message: error.message });
   }
 };
 
 // Exporting for item router
-module.exports.getAll = getAll;
-module.exports.getItemByName = getItemByName;
-module.exports.createItem = createItem;
-module.exports.updateItem = updateItem;
-module.exports.deleteItem = deleteItem;
+module.exports = {
+  getAll,
+  getItemByName,
+  createItem,
+  updateItem,
+  deleteItem,
+};
